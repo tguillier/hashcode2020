@@ -14,15 +14,23 @@ namespace HashCode2020
 
             var totalScore = 0;
             var day = 0;
-            foreach (var libId in submission.librariesToScan)
+            foreach (var libToScan in submission.librariesToScan)
             {
-                var lib = globalData.Libraries[libId.libraryId];
+                var lib = globalData.Libraries[libToScan.libraryId];
                 if (day + lib.SignUpTime >= globalData.NbdaysToScan)
                     return totalScore;
 
+                var remainingDaysForLib = globalData.NbdaysToScan - (day + lib.SignUpTime);
+                while (remainingDaysForLib > 0 && libToScan.booksToScan.Count > 0)
+                {
+                    totalScore += libToScan.booksToScan.GetRange(0, lib.NbBooksPerDay).Sum();
+                    libToScan.booksToScan.RemoveRange(0, lib.NbBooksPerDay);
+                    remainingDaysForLib--;
+                }
+                day += lib.SignUpTime;
             }
 
-                return totalScore;
+            return totalScore;
         }
 
         GlobalSubmission parseSubmissionFile(GlobalData globalData, string submissionContent)
