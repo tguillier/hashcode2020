@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace HashCode2020
 {
-    class Scorer
+    public class Scorer
     {
-        int getScore(GlobalData globalData, string submissionContent)
+        public int getScore(GlobalData globalData, string submissionContent)
         {
             GlobalSubmission submission = parseSubmissionFile(globalData, submissionContent);
 
@@ -56,7 +56,7 @@ namespace HashCode2020
                 var realLibrary = globalData.Libraries[libToScan.libraryId];
                 libToScan.booksToScan.ForEach(book =>
                 {
-                    if (realLibrary.Books.Count(b => b.Score == book) != 1)
+                    if (realLibrary.Books.Count(b => b.Value.Score == book) != 1)
                         throw new Exception($"Actual library with id {libToScan.libraryId} doesnt have a book with score {book}");
                 });
 

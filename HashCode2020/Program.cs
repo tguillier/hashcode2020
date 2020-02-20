@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using HashCode2020.Data.HashCode2020;
 
 namespace HashCode2020
@@ -7,14 +8,24 @@ namespace HashCode2020
     {
         static void Main(string[] args)
         {
-            // File reading
-            //string rawData = System.IO.File.ReadAllText(args[0]);
-            //string rawData = System.IO.File.ReadAllText("Data\\inputs\\f_libraries_of_the_world.txt");
-            string rawData = System.IO.File.ReadAllText("Data\\inputs\\a_example.txt");
+            
+            string[] files = Directory.GetFiles("Data\\inputs");
 
-            // Converting in usable data
-            BookDataFormat bdf = new BookDataFormat(rawData);
-            var p = bdf.CreateFromRawData();
+            int globalScore = 0;
+            
+            foreach(string file in files)
+            {
+                string rawData = File.ReadAllText(file);
+                BookDataFormat bdf = new BookDataFormat(rawData);
+                var globalData = bdf.CreateFromRawData();
+                string calculated = ""; // compute(globalData)
+                int score = new Scorer().getScore(globalData, calculated);
+                Console.WriteLine($"Score sur le fichier {file} : {score}");
+                globalScore += score;
+            }
+
+            Console.WriteLine($"Score global : {globalScore}");
+
             Console.ReadLine();
         }
     }
