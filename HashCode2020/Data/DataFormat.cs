@@ -1,4 +1,6 @@
-﻿namespace HashCode2020.Data
+﻿using System;
+
+namespace HashCode2020.Data
 {
     public abstract class DataFormat<T>
     {
@@ -12,8 +14,8 @@
 
         protected string GetDataFromLine(int line, int nb)
         {
-            //todo
-            return null;
+            string[] lines = _rawData.Split(Environment.NewLine);
+            return lines[line].Split(separator)[nb];
         }
 
         protected abstract T CreateFromRawData(string rawData);
