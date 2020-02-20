@@ -41,8 +41,6 @@ namespace HashCode2020.Data.HashCode2020
 
             List<Library> librairies = new List<Library>();
 
-            Book[] bookArray = books.ToArray();
-
             for (int i = 2; i < nbLibrairies * 2 + 2; i = i + 2)
             {
                 string line1 = _rawData.Split("\n")[i];
@@ -60,11 +58,10 @@ namespace HashCode2020.Data.HashCode2020
 
                 for (int j=0; j < nbLibraryBooks; j++)
                 {
-                    Book bookToTake = bookArray[int.Parse(line2Array[j])];
-                    library.Books.Add(bookToTake);
+                    library.Books.Add(j, books.ElementAt(int.Parse(line2Array[j])));
                 }
 
-                library.ScoreScan = library.Books.Sum(x => x.Score);
+                library.ScoreScan = library.Books.Select(b => b.Value).Sum(x => x.Score);
                 library.NbDaysTotalScan = library.SignUpTime + (library.Books.Count / library.NbBooksPerDay);
                 library.FullScanRatio = library.ScoreScan / library.NbDaysTotalScan;
 

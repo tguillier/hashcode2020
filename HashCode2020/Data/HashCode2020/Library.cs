@@ -6,7 +6,7 @@ namespace HashCode2020.Data.HashCode2020
 {
     public class Library
     {
-        public List<Book> Books { get; set; } = new List<Book>();
+        public Dictionary<int, Book> Books { get; set; } = new Dictionary<int, Book>();
         public int SignUpTime { get; set; }
         public int NbBooksPerDay { get; set; }
         public int ScoreScan { get; set; }
