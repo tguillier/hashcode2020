@@ -62,10 +62,10 @@ namespace HashCode2020
                     throw new Exception($"Library {libToScan.libraryId} doesnt exist");
 
                 var realLibrary = globalData.Libraries[libToScan.libraryId];
-                libToScan.booksToScan.ForEach(book =>
+                libToScan.booksToScan.ForEach(bookIndex =>
                 {
-                    if (realLibrary.Books.Count(b => b.Value.Score == book) != 1)
-                        throw new Exception($"Actual library with id {libToScan.libraryId} doesnt have a book with score {book}");
+                    if (realLibrary.Books[bookIndex] == null)
+                        throw new Exception($"Actual library with id {libToScan.libraryId} doesnt have the book number {bookIndex}");
                 });
 
                 submission.librariesToScan.Add(libToScan);
