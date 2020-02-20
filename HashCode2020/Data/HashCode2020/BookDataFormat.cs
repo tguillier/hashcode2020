@@ -15,10 +15,10 @@ namespace HashCode2020.Data.HashCode2020
             _rawData = rawData;
         }
 
-        protected string GetDataFromLine(int line, int nb)
+        protected int GetDataFromLine(int line, int nb)
         {
             string[] lines = _rawData.Split("\n");
-            return lines[line].Split(separator)[nb];
+            return int.Parse(lines[line].Split(separator)[nb]);
         }
 
         public GlobalData CreateFromRawData()
@@ -42,11 +42,18 @@ namespace HashCode2020.Data.HashCode2020
             List<Library> librairies = new List<Library>();
             AllBooks allBooks = new AllBooks();
 
-            for (int i = 2; i<nbLibrairies*2 + 2; i = i+2)
+            Book[] bookArray = books.ToArray();
+
+            for (int i = 2; i < nbLibrairies * 2 + 2; i = i + 2)
             {
-                int nbLibraryBooks = int.Parse(GetDataFromLine(i, 0));
-                int signUpTime = int.Parse(GetDataFromLine(i, 1));
-                int nbBooksPerDay = int.Parse(GetDataFromLine(i, 2));
+                string line1 = _rawData.Split("\n")[i];
+                string[] line1Array = line1.Split(separator);
+                string line2 = _rawData.Split("\n")[i + 1];
+                string[] line2Array = line2.Split(separator);
+
+                int nbLibraryBooks = int.Parse(line1Array[0]);
+                int signUpTime = int.Parse(line1Array[1]);
+                int nbBooksPerDay = int.Parse(line1Array[2]);
 
                 Library library = new Library();
                 library.SignUpTime = signUpTime;
@@ -54,7 +61,7 @@ namespace HashCode2020.Data.HashCode2020
 
                 for (int j=0; j < nbLibraryBooks; j++)
                 {
-                    Book bookToTake = books.ToArray()[int.Parse(GetDataFromLine(i + 1, j))];
+                    Book bookToTake = bookArray[int.Parse(line2Array[j])];
                     library.Books.Add(bookToTake);
                 }
 

@@ -7,10 +7,30 @@
 
   <ItemGroup>
     <None Remove="Data\inputs\a_example.txt" />
+    <None Remove="Data\inputs\b_read_on.txt" />
+    <None Remove="Data\inputs\c_incunabula.txt" />
+    <None Remove="Data\inputs\d_tough_choices.txt" />
+    <None Remove="Data\inputs\e_so_many_books.txt" />
+    <None Remove="Data\inputs\f_libraries_of_the_world.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Data\inputs\a_example.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\inputs\b_read_on.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\inputs\c_incunabula.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\inputs\d_tough_choices.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\inputs\e_so_many_books.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\inputs\f_libraries_of_the_world.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
