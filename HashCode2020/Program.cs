@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using HashCode2020.Data.HashCode2020;
 
 namespace HashCode2020
@@ -8,15 +10,28 @@ namespace HashCode2020
     {
         static void Main(string[] args)
         {
-            // File reading
-            //string rawData = System.IO.File.ReadAllText(args[0]);
-            //string rawData = System.IO.File.ReadAllText("Data\\inputs\\f_libraries_of_the_world.txt");
-            string rawData = System.IO.File.ReadAllText("Data\\inputs\\b_read_on.txt");
+            string[] files = Directory.GetFiles("Data\\inputs");
 
-            // Converting in usable data
-            BookDataFormat bdf = new BookDataFormat(rawData);
-            var dataset = bdf.CreateFromRawData();
+            int globalScore = 0;
+            
+            foreach(string file in files)
+            {
+                string rawData = File.ReadAllText(file);
+                BookDataFormat bdf = new BookDataFormat(rawData);
+                var globalData = bdf.CreateFromRawData();
+                string calculated = GetResult(globalData); // compute(globalData)
+                int score = new Scorer().getScore(globalData, calculated);
+                Console.WriteLine($"Score sur le fichier {file} : {score}");
+                globalScore += score;
+            }
 
+            Console.WriteLine($"Score global : {globalScore}");
+
+            Console.ReadLine();
+        }
+
+        private static string GetResult(GlobalData dataset)
+        {
             var submission = new Submission();
 
             dataset.Libraries = dataset.Libraries.OrderByDescending(l => l.SignUpTime).ThenBy(l => l.NbBooksPerDay).ToList();
@@ -117,26 +132,7 @@ namespace HashCode2020
                 submissionFile += string.Join(" ", lib.Books.Select(b => b.Id)) + "\n";
             }
 
-            string result = submissionFile.Substring(0, submissionFile.Length - 2);
-            
-            string[] files = Directory.GetFiles("Data\\inputs");
-
-            int globalScore = 0;
-            
-            foreach(string file in files)
-            {
-                string rawData = File.ReadAllText(file);
-                BookDataFormat bdf = new BookDataFormat(rawData);
-                var globalData = bdf.CreateFromRawData();
-                string calculated = ""; // compute(globalData)
-                int score = new Scorer().getScore(globalData, calculated);
-                Console.WriteLine($"Score sur le fichier {file} : {score}");
-                globalScore += score;
-            }
-
-            Console.WriteLine($"Score global : {globalScore}");
-
-            Console.ReadLine();
+            return submissionFile.Substring(0, submissionFile.Length - 2);
         }
     }
 
