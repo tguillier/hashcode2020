@@ -53,12 +53,13 @@ namespace HashCode2020.Data.HashCode2020
                 int nbBooksPerDay = int.Parse(line1Array[2]);
 
                 Library library = new Library();
+                library.Id = (i - 2) / 2;
                 library.SignUpTime = signUpTime;
                 library.NbBooksPerDay = nbBooksPerDay;
 
                 for (int j=0; j < nbLibraryBooks; j++)
                 {
-                    library.Books.Add(j, books.ElementAt(int.Parse(line2Array[j])));
+                    library.Books.Add(int.Parse(line2Array[j]), books.ElementAt(int.Parse(line2Array[j])));
                 }
 
                 library.ScoreScan = library.Books.Select(b => b.Value).Sum(x => x.Score);
