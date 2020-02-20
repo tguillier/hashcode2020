@@ -6,8 +6,8 @@ namespace HashCode2020.Data.HashCode2020
 {
     public class GlobalData
     {
-        AllBooks AllBooks { get; set; }
-        List<Library> Libraries { get; set; }
-        int NbdaysToScan { get; set; }
+        public AllBooks AllBooks { get; set; }
+        public List<Library> Libraries { get; set; } = new List<Library>();
+        public int NbdaysToScan { get; set; }
     }
 }

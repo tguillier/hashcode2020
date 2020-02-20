@@ -5,7 +5,7 @@ namespace HashCode2020.Data
     public abstract class DataFormat<T>
     {
         string _rawData;
-        readonly string separator = " ";
+        public readonly string separator = " ";
 
         public DataFormat(string rawData)
         {

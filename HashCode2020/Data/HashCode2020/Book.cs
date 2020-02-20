@@ -2,6 +2,6 @@
 {
     public class Book
     {
-        int Score { get; set; }
+        public int Score { get; set; }
     }
 }
