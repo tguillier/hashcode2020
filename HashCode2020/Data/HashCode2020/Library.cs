@@ -12,6 +12,6 @@ namespace HashCode2020.Data.HashCode2020
         public int ScoreScan { get; set; }
         public int NbDaysTotalScan { get; set; }
         public int FullScanRatio { get; set; }
-
+        public int Id { get; internal set; }
     }
 }

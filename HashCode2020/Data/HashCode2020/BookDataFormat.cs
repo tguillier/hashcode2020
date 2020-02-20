@@ -53,6 +53,7 @@ namespace HashCode2020.Data.HashCode2020
                 int nbBooksPerDay = int.Parse(line1Array[2]);
 
                 Library library = new Library();
+                library.Id = (i - 2) / 2;
                 library.SignUpTime = signUpTime;
                 library.NbBooksPerDay = nbBooksPerDay;
 
