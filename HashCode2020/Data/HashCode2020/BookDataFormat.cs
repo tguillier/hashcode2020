@@ -40,7 +40,6 @@ namespace HashCode2020.Data.HashCode2020
             }
 
             List<Library> librairies = new List<Library>();
-            AllBooks allBooks = new AllBooks();
 
             Book[] bookArray = books.ToArray();
 
@@ -71,6 +70,7 @@ namespace HashCode2020.Data.HashCode2020
 
                 globalData.Libraries.Add(library);
                 globalData.NbdaysToScan = nbDaysForScanning;
+                globalData.Books = books;
             }
 
             return globalData;
